@@ -1,0 +1,24 @@
+# recovery.fstab for ums9621_1h10
+# 分区表来自真机 first_stage_ramdisk/fstab.ums9621_1h10（已确认为真实数据）及 blockdev by-name 实测
+
+# mount point   fstype    device                                          flags
+
+/boot           emmc      /dev/block/by-name/boot                        flags=slotselect
+/vendor_boot    emmc      /dev/block/by-name/vendor_boot                 flags=slotselect
+/init_boot      emmc      /dev/block/by-name/init_boot                   flags=slotselect
+/dtbo           emmc      /dev/block/by-name/dtbo                        flags=slotselect
+/vbmeta         emmc      /dev/block/by-name/vbmeta                      flags=slotselect
+/misc           emmc      /dev/block/by-name/misc
+
+/system         ext4      /dev/block/mapper/system                       flags=logical;slotselect;first_stage_mount
+/vendor         ext4      /dev/block/mapper/vendor                       flags=logical;slotselect;first_stage_mount
+/product        ext4      /dev/block/mapper/product                      flags=logical;slotselect;first_stage_mount
+/system_ext     ext4      /dev/block/mapper/system_ext                   flags=logical;slotselect;first_stage_mount
+/odm            ext4      /dev/block/mapper/odm                          flags=logical;slotselect;first_stage_mount
+/vendor_dlkm    ext4      /dev/block/mapper/vendor_dlkm                  flags=logical;slotselect;first_stage_mount
+
+/metadata       ext4      /dev/block/by-name/metadata                    flags=display="Metadata"
+/data           f2fs      /dev/block/by-name/userdata                    flags=fileencryption=ice;display="Data";fsflags=noatime
+
+/external_sd    vfat      /dev/block/mmcblk1p1                           flags=display="MicroSD";storage;wipeingui;removable
+/usb-otg        vfat      /dev/block/sda1                                flags=display="USB-OTG";storage;wipeingui;removable
