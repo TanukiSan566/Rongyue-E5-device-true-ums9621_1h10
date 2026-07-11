@@ -34,6 +34,11 @@ TARGET_KERNEL_ARCH := arm64
 BOARD_RAMDISK_USE_LZ4 := true          # [已核实] 真机 vendor_boot ramdisk 是 lz4 legacy 格式
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_NO_KERNEL := true
+
+# TWRP 官方源码内置的 BOARD_SYSTEMSDK_VERSIONS 默认只到32，
+# 而我们 device.mk 里 PRODUCT_SHIPPING_API_LEVEL 设为33（真实匹配安卓13），
+# 必须显式补上33，否则编译系统会报版本不匹配错误
+BOARD_SYSTEMSDK_VERSIONS := 28 29 30 31 32 33
 BOARD_KERNEL_SEPARATED_DTBO := true
 
 # Boot header v4 —— 以下地址值 [已核实]，来自对 boot_a.bin / vendor_boot_a.bin 的真实二进制头部解析
